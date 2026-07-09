@@ -189,3 +189,61 @@ select GRADER(step, (actual = expected), actual, expected, description) as grade
      , 1 as expected 
      ,'Challenge File Format Created' as description  
 ); 
+
+-- Set your worksheet drop lists
+-- DO NOT EDIT THE CODE 
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from (  
+     SELECT 'DWW15' as step 
+     ,( select count(*) 
+      from LIBRARY_CARD_CATALOG.PUBLIC.Book_to_Author ba 
+      join LIBRARY_CARD_CATALOG.PUBLIC.author a 
+      on ba.author_uid = a.author_uid 
+      join LIBRARY_CARD_CATALOG.PUBLIC.book b 
+      on b.book_uid=ba.book_uid) as actual 
+     , 6 as expected 
+     , '3NF DB was Created.' as description  
+); 
+
+-- Set your worksheet drop lists. DO NOT EDIT THE DORA CODE.
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from
+(
+  SELECT 'DWW16' as step
+  ,( select row_count 
+    from LIBRARY_CARD_CATALOG.INFORMATION_SCHEMA.TABLES 
+    where table_name = 'AUTHOR_INGEST_JSON') as actual
+  ,6 as expected
+  ,'Check number of rows' as description
+ ); 
+
+ -- Set your worksheet drop lists. DO NOT EDIT THE DORA CODE.
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from (   
+     SELECT 'DWW17' as step 
+      ,( select row_count 
+        from LIBRARY_CARD_CATALOG.INFORMATION_SCHEMA.TABLES 
+        where table_name = 'NESTED_INGEST_JSON') as actual 
+      , 5 as expected 
+      ,'Check number of rows' as description  
+); 
+
+-- Set your worksheet drop lists. DO NOT EDIT THE DORA CODE.
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from
+(
+   SELECT 'DWW18' as step
+  ,( select row_count 
+    from SOCIAL_MEDIA_FLOODGATES.INFORMATION_SCHEMA.TABLES 
+    where table_name = 'TWEET_INGEST') as actual
+  , 9 as expected
+  ,'Check number of rows' as description  
+ );
+
+ -- Set your worksheet drop lists. DO NOT EDIT THE DORA CODE.
+
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from
+(
+  SELECT 'DWW19' as step
+  ,( select count(*) 
+    from SOCIAL_MEDIA_FLOODGATES.INFORMATION_SCHEMA.VIEWS 
+    where table_name = 'HASHTAGS_NORMALIZED') as actual
+  , 1 as expected
+  ,'Check number of rows' as description
+ ); 
