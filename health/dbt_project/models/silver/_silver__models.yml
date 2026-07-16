@@ -1,0 +1,81 @@
+version: 2
+
+models:
+
+  - name: silver_patients
+    description: "Patient dimension with derived age and age_band."
+    columns:
+      - name: patient_id
+        tests:
+          - unique
+          - not_null
+
+  - name: silver_providers
+    description: "Provider dimension."
+    columns:
+      - name: provider_id
+        tests:
+          - unique
+          - not_null
+
+  - name: silver_organizations
+    description: "Organization (hospital) dimension."
+    columns:
+      - name: organization_id
+        tests:
+          - unique
+          - not_null
+
+  - name: silver_payors
+    description: "Payor (insurance) dimension."
+    columns:
+      - name: payor_id
+        tests:
+          - unique
+          - not_null
+
+  - name: silver_encounters
+    description: "Encounter fact source (incremental)."
+    columns:
+      - name: encounter_id
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('silver_patients')
+              field: patient_id
+
+  - name: silver_conditions
+    description: "Condition events."
+    columns:
+      - name: condition_id
+        tests:
+          - unique
+          - not_null
+
+  - name: silver_medications
+    description: "Medication events (incremental)."
+    columns:
+      - name: medication_id
+        tests:
+          - unique
+          - not_null
+
+  - name: silver_procedures
+    description: "Procedure events."
+    columns:
+      - name: procedure_id
+        tests:
+          - unique
+          - not_null
+
+  - name: silver_claims
+    description: "Claims per patient/provider."
+    columns:
+      - name: claim_id
+        tests:
+          - unique
+          - not_null
