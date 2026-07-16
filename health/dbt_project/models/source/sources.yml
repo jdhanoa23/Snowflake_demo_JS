@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: staging
+    database: MEDICAL_DB
+    schema: STAGING
+    description: "Raw landing tables loaded from S3 via COPY INTO (all VARCHAR)."
+    tables:
+      - name: raw_organizations
+      - name: raw_payors
+      - name: raw_providers
+      - name: raw_patients
+        description: "Patient demographics & updated_at for SCD2."
+      - name: raw_encounters
+        description: "High-volume clinical events; drives incremental fct_encounters."
+      - name: raw_conditions
+      - name: raw_medications
+      - name: raw_procedures
+      - name: raw_claims
